@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Espacio;
 
 class espacioController extends Controller
 {
@@ -11,7 +12,8 @@ class espacioController extends Controller
      */
     public function index()
     {
-        //
+        $espacios = Espacio::all();
+        return view('espacios.index', compact('espacios'));
     }
 
     /**

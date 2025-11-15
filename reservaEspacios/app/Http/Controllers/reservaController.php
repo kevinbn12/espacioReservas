@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reserva;
 
 class reservaController extends Controller
 {
@@ -11,7 +12,8 @@ class reservaController extends Controller
      */
     public function index()
     {
-        //
+        $reservas = Reserva::all();
+        return view('reservas.index', compact('reservas'));
     }
 
     /**
