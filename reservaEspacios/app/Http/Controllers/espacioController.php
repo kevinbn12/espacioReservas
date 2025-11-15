@@ -21,7 +21,7 @@ class espacioController extends Controller
      */
     public function create()
     {
-        //
+        return view('espacios.create');
     }
 
     /**
@@ -29,7 +29,14 @@ class espacioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+            'tipo' => ['required', 'string', 'max:100'],
+            'capacidad' => ['required', 'integer','min:1'],
+            'ubicacion' => ['required', 'string', 'max:100'],
+        ]);
+        \App\Models\Espacio::create($data);
+        return redirect()->route('espacios.index')->with('ok', 'Espacio creado exitosamente.');
     }
 
     /**

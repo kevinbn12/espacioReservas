@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Solicitante</th>
                 <th>Espacio</th>
                 <th>Fecha</th>
                 <th>Hora Inicio</th>
@@ -18,6 +19,7 @@
             @foreach ($reservas as $reserva)
                 <tr>
                     <td>{{$reserva->id}}</td>
+                    <td>{{$reserva->solicitante}}</td>
                     <td>{{$reserva->espacio->nombre}}</td>
                     <td>{{$reserva->fecha}}</td>
                     <td>{{$reserva->hora_inicio}}</td>

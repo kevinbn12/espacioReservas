@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reserva;
+use App\Models\Espacio;
 
 class reservaController extends Controller
 {
@@ -21,7 +22,8 @@ class reservaController extends Controller
      */
     public function create()
     {
-        //
+        $espacios = Espacio::orderBy('nombre')->get();
+        return view('reservas.create', compact('espacios'));
     }
 
     /**
@@ -29,7 +31,16 @@ class reservaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'solicitante' => ['required', 'string', 'max:100'],
+            'espacio_id' => ['required', 'integer','min:1'],
+            'fecha' => ['required', 'string', 'max:100'],
+            'hora_inicio' => ['required', 'string', 'max:100'],
+            'hora_fin' => ['required', 'string', 'max:100'],
+            'motivo' => ['required', 'string', 'max:100'],
+        ]);
+        \App\Models\Reserva::create($data);
+        return redirect()->route('reservas.index')->with('ok', 'Reserva creada exitosamente.');
     }
 
     /**
