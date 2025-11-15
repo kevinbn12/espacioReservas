@@ -52,7 +52,8 @@ class espacioController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $espacio = \App\Models\Espacio::findOrFail($id);
+        return view('espacios.edit', compact('espacio'));
     }
 
     /**
@@ -60,7 +61,16 @@ class espacioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+            'tipo' => ['required', 'string', 'max:100'],
+            'capacidad' => ['required', 'integer','min:1'],
+            'ubicacion' => ['required', 'string', 'max:100'],
+        ]);
+
+        $espacio = \App\Models\Espacio::findOrFail($id);
+        $espacio->update($data);
+        return redirect()->route('espacios.index')->with('ok', 'Espacio actualizado.');
     }
 
     /**

@@ -56,15 +56,26 @@ class reservaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reserva = Reserva::findOrFail($id);
+        $espacios = Espacio::orderBy('nombre')->get();
+        return view('reservas.edit', compact('reserva', 'espacios'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Reserva $reserva)
     {
-        //
+        $data = $request->validate([
+            'solicitante' => ['required', 'string', 'max:100'],
+            'espacio_id' => ['required', 'integer','min:1'],
+            'fecha' => ['required', 'string', 'max:100'],
+            'hora_inicio' => ['required', 'string', 'max:100'],
+            'hora_fin' => ['required', 'string', 'max:100'],
+            'motivo' => ['required', 'string', 'max:100'],
+        ]);
+        $reserva->update($data);
+        return redirect()->route('reservas.index')->with('ok', 'Reserva actualizada exitosamente.');
     }
 
     /**
