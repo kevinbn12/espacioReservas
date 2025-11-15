@@ -78,6 +78,8 @@ class espacioController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $espacioDelete = \App\Models\Espacio::findOrFail($id);
+        $espacioDelete->delete();
+        return redirect()->route('espacios.index')->with('ok', 'Espacio eliminado.');
     }
 }

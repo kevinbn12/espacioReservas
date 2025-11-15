@@ -27,7 +27,7 @@
                     <td>{{$reserva->motivo}}</td>
                     <td>
                         <a href="{{route('reservas.edit', $reserva->id)}}" class="btn btn-warning">Editar</a>
-                        <form action="{{route('reservas.destroy', $reserva->id)}}" method="POST" style="display:inline">
+                        <form action="{{route('reservas.destroy', $reserva->id)}}" method="POST" style="display:inline" onsubmit="return confirm('¿Está seguro que desea eliminar la reserva de {{ $reserva->solicitante }} ?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>

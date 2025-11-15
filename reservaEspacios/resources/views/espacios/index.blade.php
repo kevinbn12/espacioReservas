@@ -23,7 +23,7 @@
                     <td>{{$espacio->ubicacion}}</td>
                     <td>
                         <a href="{{route('espacios.edit', $espacio->id)}}" class="btn btn-warning">Editar</a>
-                        <form action="{{route('espacios.destroy', $espacio->id)}}" method="POST" style="display:inline">
+                        <form action="{{route('espacios.destroy', $espacio->id)}}" method="POST" style="display:inline" onsubmit="return confirm('¿Está seguro que desea eliminar al espacio {{ $espacio->nombre }} ?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>

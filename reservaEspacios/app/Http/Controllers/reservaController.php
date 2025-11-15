@@ -83,6 +83,8 @@ class reservaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $reservaDelete = Reserva::findOrFail($id);
+        $reservaDelete->delete();
+        return redirect()->route('reservas.index')->with('ok', 'Reserva eliminada exitosamente.');
     }
 }
