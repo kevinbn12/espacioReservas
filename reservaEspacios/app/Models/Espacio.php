@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Espacio extends Model
 {
-    //
+    protected $fillable = [
+        'nombre',
+        'tipo',
+        'capacidad',
+        'ubicacion',
+    ];
+
+    public function reservas()
+    {
+        return $this->hasMany(Reserva::class);
+    }
 }

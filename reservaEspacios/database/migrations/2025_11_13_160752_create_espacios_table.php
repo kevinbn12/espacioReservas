@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('espacios', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre')->required();
+            $table->string('tipo')->required();
+            $table->integer('capacidad')->required();
+            $table->string('ubicacion')->required();
             $table->timestamps();
         });
     }
